@@ -33,3 +33,13 @@ $ kubectl describe pod httpd-deployment-599bf897b4-m9vn5
 $ kubectl delete deployment nginx-deployment
 
 ```
+
+## config
+```bash
+$ kubectl apply -f nginx-config.yaml
+
+$ kubectl get configmap -n default
+
+$ kubectl describe configmap nginx-config
+
+```
