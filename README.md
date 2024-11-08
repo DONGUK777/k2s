@@ -50,7 +50,6 @@ $ kubectl describe configmap nginx-config
 $ helm create vninx
 $ cd vnginx
 $ rm -rf templates/*
-# service도 따로 만들기
 $ copy $CODE_HOME/*.yaml ngpd/templates/
 $ helm install app . --set httpd.image.tag=2.4.54 --set nginx.image.tag=1.27.1 --set httpd.service.type=NodePort --set nginx.service.type=NodePort
 $ helm list
@@ -82,4 +81,35 @@ REVISION        UPDATED                         STATUS          CHART           
 3               Fri Nov  8 14:42:22 2024        superseded      vninx-0.1.0     1.16.0          Rollback to 1
 4               Fri Nov  8 14:42:32 2024        deployed        vninx-0.1.1     1.16.0          Rollback to 2
 $ helm delete app
+```
+
+# package 만들기
+```bash
+$ helm package vnginx
+Successfully packaged chart and saved it to: /home/diginori/code/docker/k2s/pkg/page/vnginx-0.1.0.tgz
+$ helm repo index .
+$ ls
+index.yaml  vnginx  vnginx-0.1.0.tgz
+
+# git push & github pages 설정
+
+# helm repo 등록
+# https://dmario24.github.io/k2s/pkg/page/index.yaml
+$ helm repo add my-repo https://dmario24.github.io/k2s/pkg/page
+"my-repo" has been added to your repositories
+
+
+# repo 조회
+$ helm repo list
+my-repo                 https://dmario24.github.io/k2s/pkg/page
+
+# chart 조회
+$ helm search repo my-repo
+NAME            CHART VERSION   APP VERSION     DESCRIPTION
+my-repo/vnginx  0.1.0           1.16.0          A Helm chart for Kubernetes
+
+# 설치
+# $ helm install <설치이름> my-repo/vnginx
+$ helm install kingkong my-repo/vnginx
+$ helm install superman my-repo/vnginx
 ```
