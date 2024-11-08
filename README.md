@@ -52,7 +52,7 @@ $ cd vnginx
 $ rm -rf templates/*
 # service도 따로 만들기
 $ copy $CODE_HOME/*.yaml ngpd/templates/
-helm install app . --set httpd.image.tag=2.4.54 --set nginx.image.tag=1.27.1 --set httpd.service.type=NodePort --set nginx.service.type=NodePort
+$ helm install app . --set httpd.image.tag=2.4.54 --set nginx.image.tag=1.27.1 --set httpd.service.type=NodePort --set nginx.service.type=NodePort
 $ helm list
 NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
 app     default         1               2024-11-08 14:42:32.054075154 +0900 KST deployed        vninx-0.1.0     1.16.0
