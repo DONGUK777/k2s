@@ -83,8 +83,9 @@ REVISION        UPDATED                         STATUS          CHART           
 $ helm delete app
 ```
 
-# package 만들기
+# Helm repo 만들기
 ```bash
+# package 만들기
 $ helm package vnginx
 Successfully packaged chart and saved it to: /home/diginori/code/docker/k2s/pkg/page/vnginx-0.1.0.tgz
 $ helm repo index .
