@@ -43,3 +43,43 @@ $ kubectl get configmap -n default
 $ kubectl describe configmap nginx-config
 
 ```
+
+## helm
+- https://helm.sh/docs/intro/cheatsheet/
+```bash
+$ helm create vninx
+$ cd vnginx
+$ rm -rf templates/*
+# service도 따로 만들기
+$ copy $CODE_HOME/*.yaml ngpd/templates/
+helm install app . --set httpd.image.tag=2.4.54 --set nginx.image.tag=1.27.1 --set httpd.service.type=NodePort --set nginx.service.type=NodePort
+$ helm list
+NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
+app     default         1               2024-11-08 14:42:32.054075154 +0900 KST deployed        vninx-0.1.0     1.16.0
+$ helm status app
+NAME: app
+LAST DEPLOYED: Fri Nov  8 14:42:32 2024
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+$ helm history app
+REVISION        UPDATED                         STATUS          CHART           APP VERSION     DESCRIPTION
+1               Fri Nov  8 14:37:23 2024        superseded      vninx-0.1.0     1.16.0          Install complete
+
+$ helm upgrade app .
+$ helm list
+$ helm history app
+REVISION        UPDATED                         STATUS          CHART           APP VERSION     DESCRIPTION
+1               Fri Nov  8 14:37:23 2024        superseded      vninx-0.1.0     1.16.0          Install complete
+2               Fri Nov  8 14:41:41 2024        superseded      vninx-0.1.1     1.16.0          Upgrade complete
+$ helm rollback app 1
+$ helm rollback app 2
+$ helm history app
+REVISION        UPDATED                         STATUS          CHART           APP VERSION     DESCRIPTION
+1               Fri Nov  8 14:37:23 2024        superseded      vninx-0.1.0     1.16.0          Install complete
+2               Fri Nov  8 14:41:41 2024        superseded      vninx-0.1.1     1.16.0          Upgrade complete
+3               Fri Nov  8 14:42:22 2024        superseded      vninx-0.1.0     1.16.0          Rollback to 1
+4               Fri Nov  8 14:42:32 2024        deployed        vninx-0.1.1     1.16.0          Rollback to 2
+$ helm delete app
+```
