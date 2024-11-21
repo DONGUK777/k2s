@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  vninx:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-11-08T16:26:38.273275249+09:00"
+    description: A Helm chart for Kubernetes
+    digest: e8145b1a91f4d8ab414054d6f6c48dad8738a80698a8683fc8d05897069efcd8
+    name: vninx
+    type: application
+    urls:
+    - vninx-0.1.1.tgz
+    version: 0.1.1
+generated: "2024-11-08T16:26:38.272595252+09:00"
